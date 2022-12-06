@@ -17,7 +17,9 @@ class AlbumFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'artist' => fake()->name(),
+            'album_name' => fake()->text(),
+            'year' => fake()->date('Y'),
         ];
     }
 }
