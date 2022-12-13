@@ -9,7 +9,13 @@ use Illuminate\Support\Facades\Gate;
 
 class AlbumController extends Controller
 {
-    public function getAlbum($id)
+    /**
+     * getAlbum
+     *
+     * @param  mixed $id
+     * @return string
+     */
+    public function getAlbum($id): string
     {
         $albums = app(GetAlbum::class)->handle([
             'id' => $id,
@@ -18,6 +24,11 @@ class AlbumController extends Controller
         return view('albums', compact('albums'));
     }
 
+    /**
+     * update
+     *
+     * @param  mixed $request
+     */
     public function update(Request $request)
     {
         /**
@@ -37,12 +48,19 @@ class AlbumController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * delete
+     *
+     * @param  mixed $request
+     */
     public function delete(Request $request)
     {
         if (!Gate::allows('delete-album', \Auth::user())) {
             abort(403);
         }
+
         Album::where('id', $request->id)->delete();
+
         return redirect()->back();
     }
 }
