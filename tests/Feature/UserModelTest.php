@@ -24,7 +24,7 @@ class UserModelTest extends TestCase
     public function createUser(): void
     {
         User::factory()->createOne();
-        $this->assertDatabaseCount('users', 2);
+        $this->assertDatabaseCount('users', 3);
     }
 
     protected function teardown(): void

@@ -50,6 +50,10 @@
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
+            <div>
+                <h3>Don't have your account yet?</h3>
+                <p><a href="{{ route('register')}}">Register now</a></p>
+            </div>
         </form>
     </x-auth-card>
 </x-guest-layout>
