@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::create([
             'name' => 'user',
-            'email' => 'user@user.com',
+            'email' => 'user@user',
             'password' => \Hash::make('123456'),
         ]);
     }
