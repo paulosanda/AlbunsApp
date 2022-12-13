@@ -20,14 +20,15 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])->name('dashboard');
-Route::post('/album', [AlbumController::class, 'getAlbum'])->name('get.album');
+// Route::get('/dashboard', [DashboardController::class, 'index'])
+//     ->middleware(['auth', 'verified'])->name('dashboard');
+// Route::post('/album', [AlbumController::class, 'getAlbum'])->name('get.album');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/album/{id}', [AlbumController::class, 'getAlbum'])->name('get.album');
+    Route::put('/album', [AlbumController::class, 'update'])->name('update.album');
+    Route::delete('/album', [AlbumController::class, 'delete'])->name('delete.album');
+});
 
 require __DIR__ . '/auth.php';

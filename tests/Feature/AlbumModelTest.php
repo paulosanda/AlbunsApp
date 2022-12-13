@@ -16,7 +16,7 @@ class AlbumModelTest extends TestCase
      */
     public function albumModel()
     {
-        Album::factory()->count(10)->create();
+        dd(Album::factory()->count(10)->create());
 
         $this->assertDatabaseCount('albuns', 10);
     }

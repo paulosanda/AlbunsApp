@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use Illuminate\Support\Facades\Http;
+use App\Models\Album;
 
 class GetAlbum
 {
@@ -12,27 +13,32 @@ class GetAlbum
     ) {
     }
 
-    /**
-     * handle
-     *
-     * @return array
-     */
-    public function handle($data): array
+
+    public function handle($data)
     {
         $albums = Http::withHeaders([
             'Authorization' => 'basic ' . $this->key,
         ])->get($this->url . '?artist_id=' . $data['id']);
 
-        $response = json_decode($albums);
-        dd($response);
-        $artistArray = array();
-        foreach ($response as $data) {
-            foreach ($data as $d) {
-                $artist = json_decode(json_encode($d[0], true));
-                array_push($artistArray, ['name' => $artist->name]);
-            }
+        $response = json_decode($albums, true);
+        /**At this point the API does not provide the necessary data
+         * so we mock the results to be able to proceed
+         * */
+        // dd($response['json']);
+        $albums = Album::where('artist', $response['json'][0]['name'])->get();
+        if ($albums->count() < 1) {
+            $newAlbums = $this->createAlbums($response['json'][0]['name']);
+            return $newAlbums;
+        } else {
+            return $albums;
         }
+    }
 
-        return $artistArray;
+    protected function createAlbums($data)
+    {
+        $newAlbums = Album::factory()->count(10)->create([
+            'artist' => $data
+        ]);
+        return $newAlbums;
     }
 }
