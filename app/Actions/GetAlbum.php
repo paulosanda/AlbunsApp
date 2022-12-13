@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use Illuminate\Support\Facades\Http;
 use App\Models\Album;
+use Illuminate\Database\Eloquent\Collection;
 
 class GetAlbum
 {
@@ -13,8 +14,13 @@ class GetAlbum
     ) {
     }
 
-
-    public function handle($data)
+    /**
+     * handle
+     *
+     * @param  mixed $data
+     * @return Collection
+     */
+    public function handle($data): Collection
     {
         $albums = Http::withHeaders([
             'Authorization' => 'basic ' . $this->key,
@@ -34,7 +40,14 @@ class GetAlbum
         }
     }
 
-    protected function createAlbums($data)
+
+    /**
+     * createAlbums
+     *
+     * @param  mixed $data
+     * @return Collection
+     */
+    protected function createAlbums($data): Collection
     {
         $newAlbums = Album::factory()->count(10)->create([
             'artist' => $data
