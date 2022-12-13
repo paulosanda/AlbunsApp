@@ -18,7 +18,7 @@ class AlbumFactory extends Factory
     {
         return [
             'artist' => fake()->name(),
-            'album_name' => fake()->text(),
+            'album_name' => fake()->text(10),
             'year' => fake()->date('Y'),
         ];
     }

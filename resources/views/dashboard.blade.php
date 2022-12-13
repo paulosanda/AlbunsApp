@@ -11,12 +11,15 @@
                 <div class="p-6 text-gray-900">
                    @foreach ($artists as $artist)
                    <div class="row">
-                    <form class="form-horizontal" id="artist" method="post" action="{{ route('get.album')}}">
-                   {{ $artist['name'] }}@csrf
-                   <input type="hidden" name="id" value="{{ $artist['id'] }}">
-                   <span class="artist"><input type="submit"
-                    class="btn btn-sm border-t-neutral-50" value="See albums"></span>
-                    </form>
+                        <div class="col-8">
+                            {{ $artist['name'] }}
+                        </div>
+                        <div class="col-4">
+                            <span class="artist">
+                                <a href="{{ url('album').'/'.$artist['id'] }}" >
+                                    See Albums</a>
+                            </span>
+                        </div>
                    </div>
                    @endforeach
                 </div>
