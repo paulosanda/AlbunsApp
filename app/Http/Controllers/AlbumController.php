@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Actions\GetAlbum;
 use App\Models\Album;
+use Illuminate\Support\Facades\Gate;
 
 class AlbumController extends Controller
 {
@@ -38,6 +39,9 @@ class AlbumController extends Controller
 
     public function delete(Request $request)
     {
+        if (!Gate::allows('delete-album', \Auth::user())) {
+            abort(403);
+        }
         Album::where('id', $request->id)->delete();
         return redirect()->back();
     }

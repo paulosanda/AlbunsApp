@@ -35,12 +35,14 @@
                                     <span class="artist">
                                     <input type="submit" class="btn btn-warning" value="Update">
                         </form>
+                        @can('delete-album')
                         <form class="form-horizontal" method="post" id="delete" action="{{ route('delete.album')}}">
                             @method('delete')@csrf
                             <input type="hidden" name="id" value="{{ $album->id }}">
                                     <input type="submit" class="btn btn-danger" value="Delete ">
                         </span>
                         </form>
+                        @endcan
                                 </td>
                             </tr>
 
