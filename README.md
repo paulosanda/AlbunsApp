@@ -6,6 +6,7 @@ After cloning the repository and performing composer install, you can choose to 
 
 -   up
 -   down
+
     To start and end the sail.
     Don't forget to give the necessary permissions.
 
