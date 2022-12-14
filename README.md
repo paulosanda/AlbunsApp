@@ -14,6 +14,7 @@ When performing the database migration and seed, you will have created two users
 
 -   admin@admin
 -   user@user
+    
     Using by default password 123456, but you can change it on seeder file.
 
 When accessing localhost you will have the login page, and you can use one of the two users created during the seeder
